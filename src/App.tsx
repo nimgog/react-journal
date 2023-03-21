@@ -7,6 +7,8 @@ import { useLocalStorage } from "./useLocalStorage";
 import { useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { NoteList } from "./NoteList";
+import { ViewNote } from "./ViewNote";
+import { Note } from "./Note";
 
 export type Note = {
   id: string;
@@ -69,8 +71,8 @@ function App() {
           path="/new"
           element={<NewNote onAddTopic={addTopic} onSubmit={onCreateNote} availableTopics={topics}/>}
         />
-        <Route path="/:id">
-          <Route index element={<h1>Show</h1>}></Route>
+        <Route path="/:id" element={<ViewNote notes={notesWithTopics}/>}>
+          <Route index element={<Note />}></Route>
           <Route path="edit" element={<h1>Edit</h1>}></Route>
         </Route>
         <Route path="*" element={<Navigate to={"/"} />} />
